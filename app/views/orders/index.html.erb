@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<div class="page-header">
+  <h1>購入済み商品一覧</h1>
+</div>
+<div class="container">
+    <% @posts.each do |post| %>
+    <div class="row col-sm-6">
+      <div class="img-box">
+        <h2><%= post.name %></h2>
+        <h2><%= post.price %>円</h2>
+      </div>
+    </div>
+  <% end %>
