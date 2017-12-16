@@ -64,7 +64,21 @@ Rails.application.configure do
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+  # ↑元々はfalse
+  # 追記ここから
+  config.action_mailer.default_url_options = { :host => "localhost", :port => 3000 }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :enable_starttls_auto => true,
+    :domain => 'gmail.com',
+    :address => 'smtp.gmail.com',
+    :port => 587,
+    :authentication => 'plain',
+    :user_name => 'try.osada@gmail.com',
+    :password => 'sravwebdcpcyxwhd'
+  }
+  # ここまで
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
@@ -88,4 +102,17 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # s3の設定
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :bucket => 'websuku-osada-201709',
+    :s3_region => 'ap-northeast-1',
+    :s3_host_name => 's3-ap-northeast-1.amazonaws.com',
+    :s3_credentials => {
+      access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+      secret_access_key: ENV['AWS_SECRET_ACCESS_KEY']
+    }
+  }
+
 end

@@ -1,0 +1,27 @@
+<% @posts.each do |post| %>
+  <div class="row col-sm-6">
+    <div class="img-box">
+      <% if post.pictures.empty? %>
+        <%= image_tag 'https://s3-ap-northeast-1.amazonaws.com/websuku-osada-201709/no_image.jpg', :size => '300x300' %>
+      <% else %>
+        <ul>
+          <% post.pictures.first(1).each do |pic| %>
+            <div id="picture_<%= pic.id %>">
+              <%= image_tag(pic.image.url(:thumb)) %>
+            </div>
+          <% end %>
+        </ul>
+      <% end %>
+      <h2><%= link_to post.name, post_path(post) %></h2>
+      <h2><%= post.price %>円</h2>
+      <h2><%= post.body %></h2>
+      <% if post.stock.to_i == 0 %>
+        <h2 style="color: gray;">在庫なし</h2>
+      <% elsif post.stock.to_i < 10 %>
+        <h2 style="color: red;">在庫<%= post.stock.to_i %>個</h2>
+      <% else post.stock.to_i >= 10 %>
+        <h2 style="color: blue;">在庫あり</h2>
+      <% end %>
+    </div>
+  </div>
+<% end %>

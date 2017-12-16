@@ -62,6 +62,7 @@ gem 'kaminari'
 gem 'less-rails', git: 'https://github.com/MustafaZain/less-rails'
 gem 'twitter-bootstrap-rails'
 gem 'breadcrumbs_on_rails'
-gem 'paperclip'
+gem 'paperclip' # 画像アップローダ
+gem 'aws-sdk', '~> 2.3' # AWS
 gem 'rmagick'
 gem 'pry-rails'

@@ -1,8 +1,9 @@
 class Picture < ApplicationRecord
 	belongs_to :post
 	has_attached_file :image,
-		:styles => { medium: "500x500>", thumb: "300x300!" },
-		:url => "/assets/arts/:id/:style/:basename.:extension",
-		:path => "#{Rails.root}/public/assets/arts/:id/:style/:basename.:extension"
-	do_not_validate_attachment_file_type :image
+		:path => ":attachment/:id/:style.:extension",
+		styles: { medium: "500x500>", thumb: "300x300!" },
+		default_url: "/images/:style/missing.png"
+		
+	validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/ #
 end
